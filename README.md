@@ -1,12 +1,22 @@
 # ts-nano-event
 
 [![npm version](https://img.shields.io/npm/v/ts-nano-event.svg)](https://www.npmjs.com/package/ts-nano-event)
+[![npm downloads](https://img.shields.io/npm/dm/ts-nano-event.svg)](https://www.npmjs.com/package/ts-nano-event)
 [![CI](https://github.com/ofershap/ts-nano-event/actions/workflows/ci.yml/badge.svg)](https://github.com/ofershap/ts-nano-event/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bundle size](https://img.shields.io/badge/minified-284_B-brightgreen)](https://github.com/ofershap/ts-nano-event)
 [![Bundle size gzip](https://img.shields.io/badge/gzip-203_B-brightgreen)](https://github.com/ofershap/ts-nano-event)
 
-> Typed event emitter in ~200 bytes (gzipped). Full TypeScript inference with zero runtime overhead.
+A tiny, fully-typed event emitter that catches wrong payloads at compile time — not at runtime.
+
+```ts
+const emitter = createEmitter<{ login: { user: string } }>();
+emitter.on("login", (data) => data.user); // ✅ autocomplete works
+emitter.emit("login", { wrong: true });   // ❌ compile error
+```
+
+> 203 bytes gzipped. Full TypeScript inference. Zero dependencies.
 
 ![Demo](assets/demo.gif)
 
@@ -108,12 +118,3 @@ import type { Emitter, Listener } from "ts-nano-event";
 
 [MIT](LICENSE) &copy; [Ofer Shapira](https://github.com/ofershap)
 
----
-
-### Other projects by [@ofershap](https://github.com/ofershap)
-
-- [`use-stepper`](https://github.com/ofershap/use-stepper) — React hook for multi-step forms and wizards
-- [`hebrew-slugify`](https://github.com/ofershap/hebrew-slugify) — Slugify Hebrew text for URLs
-- [`env-guard`](https://github.com/ofershap/env-guard) — Validate .env files against a schema
-- [`ai-commit-msg`](https://github.com/ofershap/ai-commit-msg) — GitHub Action for AI commit messages
-- [`awesome-hebrew-dev`](https://github.com/ofershap/awesome-hebrew-dev) — Curated list of Hebrew developer resources
