@@ -65,37 +65,11 @@ emitter.on("form:submit", () => track("submit"));
 - **State management** — data changes, multiple views need to update
 - **Microservice communication** — services emit events without knowing who consumes them
 
-## The problem with existing emitters
+## Why this library?
 
-The most popular event emitters ([mitt](https://github.com/developit/mitt) — 11.8K stars, [nanoevents](https://github.com/ai/nanoevents) — 5K stars) have a **TypeScript problem**: they don't fully catch mistakes at compile time.
+Popular event emitters like [mitt](https://github.com/developit/mitt) and [nanoevents](https://github.com/ai/nanoevents) are great — they're tiny and battle-tested. But most lightweight emitters don't fully leverage TypeScript's type system. You can often misspell an event name, pass the wrong payload shape, or need to cast handler parameters manually — and the compiler won't catch it.
 
-### mitt — wrong payloads slip through
-
-With mitt, you can emit the wrong data and TypeScript won't stop you:
-
-```ts
-import mitt from "mitt";
-
-type Events = {
-  login: { user: string };
-};
-
-const emitter = mitt<Events>();
-
-// The handler receives the payload typed as `unknown` — not { user: string }
-emitter.on("login", (event) => {
-  event.user; // ❌ Property 'user' does not exist on type 'unknown'
-  // You're forced to cast: (event as { user: string }).user
-});
-```
-
-This is [a real issue](https://github.com/developit/mitt/issues/188) developers hit — they end up using `any` to work around it, which defeats the purpose of TypeScript. Another [open issue](https://github.com/developit/mitt/issues/163) shows that defining events with `interface` (instead of `type`) doesn't work at all.
-
-### nanoevents — uses `any` internally
-
-Nanoevents is tiny (107 bytes) but its emit function [uses `any`](https://github.com/ai/nanoevents/blob/main/index.d.ts) for payloads, so you can pass completely wrong data without a compile error.
-
-### ts-nano-event — full type safety
+`ts-nano-event` is built from the ground up for TypeScript. Every event name and every payload is checked at compile time:
 
 ```ts
 import { createEmitter } from "ts-nano-event";
@@ -119,14 +93,14 @@ No casting. No `any`. No runtime surprises.
 
 ## Comparison
 
-|                            | ts-nano-event                                 | mitt                                                             | nanoevents      |
-| -------------------------- | --------------------------------------------- | ---------------------------------------------------------------- | --------------- |
-| **Fully typed `emit()`**   | Yes — wrong payloads are compile errors       | Partial — payload typed as `unknown` in handlers                 | No — uses `any` |
-| **Typed `on()` inference** | Yes — listener params inferred from event map | Yes                                                              | Yes             |
-| **Works with `interface`** | Yes                                           | [No](https://github.com/developit/mitt/issues/163) — only `type` | No              |
-| **Unsubscribe return**     | `on()` returns unsub function                 | No — must call `off()`                                           | Yes             |
-| **Size (min+gzip)**        | **203 B**                                     | 200 B                                                            | 107 B           |
-| **Dependencies**           | 0                                             | 0                                                                | 0               |
+|                            | ts-nano-event                                 | mitt                                             | nanoevents      |
+| -------------------------- | --------------------------------------------- | ------------------------------------------------ | --------------- |
+| **Fully typed `emit()`**   | Yes — wrong payloads are compile errors       | Partial — payload typed as `unknown` in handlers | No — uses `any` |
+| **Typed `on()` inference** | Yes — listener params inferred from event map | Yes                                              | Yes             |
+| **Works with `interface`** | Yes                                           | No — only `type`                                 | No              |
+| **Unsubscribe return**     | `on()` returns unsub function                 | No — must call `off()`                           | Yes             |
+| **Size (min+gzip)**        | **203 B**                                     | ~200 B                                           | ~107 B          |
+| **Dependencies**           | 0                                             | 0                                                | 0               |
 
 ## Install
 
