@@ -6,5 +6,6 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   treeshake: true,
+  minify: true,
   clean: true,
 });
