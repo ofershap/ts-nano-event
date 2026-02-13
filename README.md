@@ -10,13 +10,13 @@
 
 ## Why
 
-| | ts-nano-event | mitt | nanoevents |
-|---|---|---|---|
-| **Fully typed `emit()`** | Yes — wrong payloads are compile errors | Partial — payload typed as `unknown` in handlers | No — uses `any` |
-| **Typed `on()` inference** | Yes — listener params inferred from event map | Yes | Yes |
-| **Unsubscribe return** | `on()` returns unsub function | No — must call `off()` | Yes |
-| **Size (min+gzip)** | **163 B** | 200 B | 107 B |
-| **Works with `interface`** | Yes | No | No |
+|                            | ts-nano-event                                 | mitt                                             | nanoevents      |
+| -------------------------- | --------------------------------------------- | ------------------------------------------------ | --------------- |
+| **Fully typed `emit()`**   | Yes — wrong payloads are compile errors       | Partial — payload typed as `unknown` in handlers | No — uses `any` |
+| **Typed `on()` inference** | Yes — listener params inferred from event map | Yes                                              | Yes             |
+| **Unsubscribe return**     | `on()` returns unsub function                 | No — must call `off()`                           | Yes             |
+| **Size (min+gzip)**        | **163 B**                                     | 200 B                                            | 107 B           |
+| **Works with `interface`** | Yes                                           | No                                               | No              |
 
 ## Install
 
@@ -68,7 +68,9 @@ Returns an object with:
 Subscribe to an event. Returns a function that removes the listener when called.
 
 ```ts
-const off = emitter.on("resize", (data) => { /* ... */ });
+const off = emitter.on("resize", (data) => {
+  /* ... */
+});
 off(); // remove listener
 ```
 
@@ -77,7 +79,9 @@ off(); // remove listener
 Remove a specific listener. Alternative to calling the unsubscribe function.
 
 ```ts
-const handler = (data: { width: number; height: number }) => { /* ... */ };
+const handler = (data: { width: number; height: number }) => {
+  /* ... */
+};
 emitter.on("resize", handler);
 emitter.off("resize", handler);
 ```
