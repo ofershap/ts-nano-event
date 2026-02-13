@@ -1,7 +1,7 @@
 {
   "name": "ts-nano-event",
-  "version": "0.0.0-development",
-  "description": "Typed event emitter in <200 bytes",
+  "version": "1.0.1",
+  "description": "Tiny, fully-typed event emitter — catches wrong event names and payloads at compile time. 203 bytes gzipped. Zero dependencies.",
   "type": "module",
   "exports": {
     ".": {
@@ -66,11 +66,16 @@
     "event-emitter",
     "typed",
     "typescript",
+    "type-safe",
     "tiny",
     "events",
     "pubsub",
     "emitter",
-    "nano"
+    "mitt",
+    "nanoevents",
+    "event-bus",
+    "lightweight",
+    "zero-dependency"
   ],
   "author": "Ofer Shapira",
   "license": "MIT",
