@@ -8,6 +8,15 @@
 
 > Typed event emitter in ~200 bytes (gzipped). Full TypeScript inference with zero runtime overhead.
 
+<p align="center">
+  <img src="assets/demo.gif" alt="ts-nano-event demo" width="600" />
+</p>
+
+
+<p align="center">
+  <img src="assets/demo.gif" alt="ts-nano-event demo" width="600" />
+</p>
+
 ## Why
 
 |                            | ts-nano-event                                 | mitt                                             | nanoevents      |
