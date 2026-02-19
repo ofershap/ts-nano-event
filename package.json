@@ -1,6 +1,6 @@
 {
   "name": "ts-nano-event",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tiny, fully-typed event emitter — catches wrong event names and payloads at compile time. 203 bytes gzipped. Zero dependencies.",
   "type": "module",
   "exports": {
