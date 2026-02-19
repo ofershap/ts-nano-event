@@ -1,4 +1,4 @@
-# ts-nano-event
+# ts-nano-event — Tiny Type-Safe Event Emitter for TypeScript
 
 [![npm version](https://img.shields.io/npm/v/ts-nano-event.svg)](https://www.npmjs.com/package/ts-nano-event)
 [![npm downloads](https://img.shields.io/npm/dm/ts-nano-event.svg)](https://www.npmjs.com/package/ts-nano-event)
@@ -8,7 +8,7 @@
 [![Bundle size](https://img.shields.io/badge/minified-284_B-brightgreen)](https://github.com/ofershap/ts-nano-event)
 [![Bundle size gzip](https://img.shields.io/badge/gzip-203_B-brightgreen)](https://github.com/ofershap/ts-nano-event)
 
-A tiny, fully-typed event emitter that catches wrong event names and wrong payloads **at compile time** — not at runtime.
+A tiny (203B gzip), fully-typed event emitter that catches wrong event names and wrong payloads **at compile time** — not at runtime. Zero dependencies.
 
 ```ts
 const emitter = createEmitter<{ login: { user: string } }>();
@@ -18,7 +18,7 @@ emitter.emit("login", { wrong: true }); // ❌ compile error — caught before y
 
 > 203 bytes gzipped. Full TypeScript inference. Zero dependencies. Works with both `type` and `interface`.
 
-![Demo](assets/demo.gif)
+![ts-nano-event demo — TypeScript autocomplete and compile-time error for wrong event payload](assets/demo.gif)
 
 ## What is an event emitter?
 
